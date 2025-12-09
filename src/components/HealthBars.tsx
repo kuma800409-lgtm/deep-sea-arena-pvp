@@ -1,0 +1,102 @@
+'use client';
+
+import React from 'react';
+import type { ShipStats } from '@/types/game';
+import { getHealthPercentage } from '@/lib/gameEngine';
+
+interface HealthBarsProps {
+  ship: ShipStats;
+  mana: number;
+  maxMana: number;
+  isPlayer?: boolean;
+  playerName?: string;
+}
+
+export function HealthBars({ ship, mana, maxMana, isPlayer = true, playerName = 'Player' }: HealthBarsProps) {
+  const shieldPercent = getHealthPercentage(ship.shield, ship.maxShield);
+  const armorPercent = getHealthPercentage(ship.armor, ship.maxArmor);
+  const hullPercent = getHealthPercentage(ship.hull, ship.maxHull);
+  const manaPercent = getHealthPercentage(mana, maxMana);
+  
+  return (
+    <div className={`w-full max-w-md mx-auto p-3 rounded-lg bg-black/50 backdrop-blur-sm ${isPlayer ? '' : 'order-first'}`}>
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-white font-bold text-sm md:text-base">{playerName}</span>
+        <span className="text-gray-400 text-xs">
+          {Math.round(ship.hull)}/{ship.maxHull} HP
+        </span>
+      </div>
+      
+      <div className="space-y-2">
+        <div className="relative">
+          <div className="flex items-center gap-2">
+            <span className="text-cyan-400 text-xs w-14">Shield</span>
+            <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-cyan-600 to-cyan-400 transition-all duration-300 relative"
+                style={{ width: `${shieldPercent}%` }}
+              >
+                <div className="absolute inset-0 bg-white/20 animate-pulse" />
+              </div>
+            </div>
+            <span className="text-cyan-400 text-xs w-12 text-right">{Math.round(ship.shield)}</span>
+          </div>
+        </div>
+        
+        <div className="relative">
+          <div className="flex items-center gap-2">
+            <span className="text-yellow-500 text-xs w-14">Armor</span>
+            <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-yellow-700 to-yellow-500 transition-all duration-300"
+                style={{ width: `${armorPercent}%` }}
+              />
+            </div>
+            <span className="text-yellow-500 text-xs w-12 text-right">{Math.round(ship.armor)}</span>
+          </div>
+        </div>
+        
+        <div className="relative">
+          <div className="flex items-center gap-2">
+            <span className="text-red-500 text-xs w-14">Hull</span>
+            <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-red-700 to-red-500 transition-all duration-300"
+                style={{ width: `${hullPercent}%` }}
+              />
+            </div>
+            <span className="text-red-500 text-xs w-12 text-right">{Math.round(ship.hull)}</span>
+          </div>
+        </div>
+        
+        <div className="relative">
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400 text-xs w-14">Mana</span>
+            <div className="flex-1 h-3 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className={`h-full transition-all duration-300 ${mana >= maxMana ? 'bg-gradient-to-r from-blue-600 to-purple-500 animate-pulse' : 'bg-gradient-to-r from-blue-700 to-blue-500'}`}
+                style={{ width: `${manaPercent}%` }}
+              />
+            </div>
+            <span className={`text-xs w-12 text-right ${mana >= maxMana ? 'text-purple-400 font-bold' : 'text-blue-400'}`}>
+              {Math.round(mana)}%
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function MiniHealthBar({ current, max, color }: { current: number; max: number; color: string }) {
+  const percent = getHealthPercentage(current, max);
+  
+  return (
+    <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+      <div 
+        className={`h-full ${color} transition-all duration-300`}
+        style={{ width: `${percent}%` }}
+      />
+    </div>
+  );
+}

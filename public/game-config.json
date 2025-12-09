@@ -1,0 +1,91 @@
+{
+  "ship": {
+    "maxShield": 1000,
+    "maxArmor": 1000,
+    "maxHull": 1000,
+    "shieldRegenRate": 10,
+    "shieldRegenDelay": 3000
+  },
+  "weapons": {
+    "laser": {
+      "name": "Pulse Laser",
+      "damage": 100,
+      "fireRate": 1500,
+      "shieldMultiplier": 1.5,
+      "armorMultiplier": 1.0,
+      "hullMultiplier": 0.8
+    },
+    "kinetic": {
+      "name": "Railgun",
+      "damage": 120,
+      "fireRate": 2000,
+      "shieldMultiplier": 0.8,
+      "armorMultiplier": 1.5,
+      "hullMultiplier": 1.0
+    },
+    "missile": {
+      "name": "Guided Missile",
+      "damage": 150,
+      "fireRate": 3000,
+      "shieldMultiplier": 1.0,
+      "armorMultiplier": 1.0,
+      "hullMultiplier": 1.3
+    },
+    "plasma": {
+      "name": "Plasma Cannon",
+      "damage": 80,
+      "fireRate": 1000,
+      "shieldMultiplier": 1.2,
+      "armorMultiplier": 1.2,
+      "hullMultiplier": 1.2
+    }
+  },
+  "tacticalCommands": {
+    "focusFire": {
+      "cooldown": 10000,
+      "duration": 3000,
+      "damageBonus": 1.5,
+      "description": "Concentrate all weapons on target"
+    },
+    "evasive": {
+      "cooldown": 10000,
+      "duration": 3000,
+      "dodgeChance": 0.5,
+      "accuracyPenalty": 0.3,
+      "description": "Perform evasive maneuvers"
+    },
+    "energyShunt": {
+      "cooldown": 10000,
+      "duration": 5000,
+      "shieldRegenBonus": 2.0,
+      "weaponPenalty": 0.7,
+      "description": "Divert power to shields"
+    }
+  },
+  "battle": {
+    "duration": 90000,
+    "aiDifficulty": 0.6
+  },
+  "loadouts": {
+    "balanced": {
+      "name": "Balanced Assault",
+      "weapons": ["laser", "kinetic", "missile", "plasma"],
+      "description": "Well-rounded for any situation"
+    },
+    "shieldBreaker": {
+      "name": "Shield Breaker",
+      "weapons": ["laser", "laser", "plasma", "plasma"],
+      "description": "Tear through energy shields"
+    },
+    "armorPiercer": {
+      "name": "Armor Piercer",
+      "weapons": ["kinetic", "kinetic", "kinetic", "missile"],
+      "description": "Penetrate heavy armor"
+    },
+    "heavyGunner": {
+      "name": "Heavy Gunner",
+      "weapons": ["missile", "missile", "plasma", "kinetic"],
+      "description": "Maximum raw damage"
+    }
+  }
+}
