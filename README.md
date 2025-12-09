@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Deep Sea Arena PVP Battle System
+
+A real-time 1v1 battleship combat game set in the depths of the ocean. Engage in intense auto-battles with layered defense systems, tactical commands, and mana-powered ultimates.
+
+## Features
+
+- **1v1 Battleship Combat** - Fight against AI or other players
+- **Layered Defense System** - Shield, Armor, and Hull protection layers
+- **Tactical Commands** - Focus Fire, Evasive Maneuvers, and Energy Shunt abilities
+- **Auto-Battle System** - Real-time combat with simultaneous attacks
+- **Mana System** - Build mana with attacks, auto-trigger ultimates at 100%
+- **4 Loadout Configurations** - Balanced Assault, Shield Breaker, Armor Piercer, Heavy Gunner
+- **90-Second Battle Timer** - Win by destroying opponent or having highest hull at timeout
+- **Mobile Responsive** - Works on desktop and mobile devices
+
+## Technology Stack
+
+- **Frontend Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Build:** Static Export for deployment
+- **Backend (Optional):** Cloudflare Workers with Durable Objects (for PvP multiplayer)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Start development server
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+### Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Create production build
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Game Modes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Play vs AI
+Single-player mode against an AI opponent. Works immediately without any backend setup.
 
-## Deploy on Vercel
+### Play vs Player
+Multiplayer mode using room codes. Requires the Cloudflare Workers backend to be deployed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/              # Next.js App Router pages
+│   ├── page.tsx            # Landing page
+│   ├── matchmaking/        # Room code / matchmaking
+│   ├── loadout/            # Loadout selection
+│   ├── battle/             # Battle scene
+│   └── result/             # Victory/defeat screen
+├── components/       # React components
+│   ├── Battleship.tsx      # Ship graphics
+│   ├── HealthBars.tsx      # HP/Shield/Armor bars
+│   ├── TacticalButtons.tsx
+│   └── BattleTimer.tsx
+├── lib/              # Game logic
+│   ├── gameEngine.ts       # Battle calculations
+│   └── storage.ts          # Local storage helpers
+└── types/            # TypeScript interfaces
+```
+
+## Deployment
+
+### Deploy to Vercel
+
+```bash
+npm install
+npm run build
+npx vercel --prod
+```
+
+See `DEPLOYMENT_INSTRUCTIONS.md` for detailed steps.
+
+## Game Configuration
+
+Edit `public/game-config.json` to adjust game balance:
+- Ship stats (shield, armor, hull)
+- Weapon damage and fire rates
+- Tactical command cooldowns
+- Battle duration
+
+## License
+
+MIT License
