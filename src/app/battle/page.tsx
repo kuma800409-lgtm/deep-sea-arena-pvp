@@ -441,44 +441,82 @@ function BattleContent() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col p-2 md:p-4 relative overflow-hidden">
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+    <div className="h-screen flex flex-col relative overflow-hidden">
+      {/* Animated background layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#000a1e] via-[#001a4d] to-[#000a1e]" />
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute w-full h-full animate-pulse" style={{
+          background: 'radial-gradient(ellipse at 30% 20%, rgba(0, 150, 200, 0.2) 0%, transparent 50%)',
+        }} />
+        <div className="absolute w-full h-full animate-pulse" style={{
+          background: 'radial-gradient(ellipse at 70% 80%, rgba(0, 100, 150, 0.15) 0%, transparent 50%)',
+          animationDelay: '1s',
+        }} />
+      </div>
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `floatUp ${10 + Math.random() * 10}s linear infinite`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Timer at top */}
+      <div className="relative z-20 pt-2 flex justify-center">
         <BattleTimer timeRemaining={timeRemaining} isActive={isActive} />
       </div>
 
-      <div className="flex-1 flex flex-col justify-between py-16 md:py-20">
+      {/* Main battle area - scrollable if needed but fits in viewport */}
+      <div className="flex-1 flex flex-col justify-between py-2 px-2 md:px-4 min-h-0 relative z-10">
+        {/* ENEMY section */}
         <div className="flex flex-col items-center">
+          <div className="text-red-500 font-bold text-lg md:text-xl mb-1 flex items-center gap-2">
+            <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+            ENEMY
+            <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+          </div>
           <HealthBars 
             ship={opponent.ship} 
             mana={opponent.mana} 
             maxMana={MAX_MANA}
             isPlayer={false}
             playerName={opponent.name}
+            colorScheme="enemy"
           />
-          <div className="relative mt-4">
+          <div className="relative mt-2">
             <Battleship 
               isPlayer={false} 
               isEnemy={true}
               damaged={opponent.ship.hull < opponent.ship.maxHull * 0.5}
               shieldActive={opponent.ship.shield > 0}
-              className="w-24 h-24 md:w-32 md:h-32"
+              className="w-20 h-20 md:w-28 md:h-28"
             />
           </div>
         </div>
 
-        <div className="relative h-32 md:h-48">
+        {/* Damage numbers area */}
+        <div className="relative h-20 md:h-32 flex-shrink-0">
           {damageNumbers.map(dn => (
             <DamageNumber key={dn.id} value={dn.value} x={dn.x} y={dn.y} isPlayer={dn.isPlayer} />
           ))}
         </div>
 
+        {/* YOU section */}
         <div className="flex flex-col items-center">
-          <div className="relative mb-4">
+          <div className="relative mb-2">
             <Battleship 
               isPlayer={true}
               damaged={player.ship.hull < player.ship.maxHull * 0.5}
               shieldActive={player.ship.shield > 0}
-              className="w-24 h-24 md:w-32 md:h-32"
+              className="w-20 h-20 md:w-28 md:h-28"
             />
           </div>
           <HealthBars 
@@ -487,11 +525,18 @@ function BattleContent() {
             maxMana={MAX_MANA}
             isPlayer={true}
             playerName={player.name}
+            colorScheme="player"
           />
+          <div className="text-cyan-400 font-bold text-lg md:text-xl mt-1 flex items-center gap-2">
+            <span className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse" />
+            YOU
+            <span className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse" />
+          </div>
         </div>
       </div>
 
-      <div className="mt-4">
+      {/* FIXED tactical buttons at bottom - always visible */}
+      <div className="sticky bottom-0 left-0 right-0 z-30 bg-black/80 backdrop-blur-md border-t border-cyan-400/30 safe-area-bottom">
         <TacticalPanel
           cooldowns={tacticalCooldowns}
           activeEffects={activeTacticalEffects}
