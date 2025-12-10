@@ -174,3 +174,276 @@ body {
 .ultimate-ready {
   animation: ultimateGlow 1s ease-in-out infinite;
 }
+
+/* ========== BATTLE EFFECTS ANIMATIONS ========== */
+
+/* Laser beam animation */
+@keyframes laserBeamAnim {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* Ultimate beam animation */
+@keyframes ultimateBeamAnim {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  30% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* Impact flash */
+@keyframes impactFlash {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Impact ring expansion */
+@keyframes impactRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Particle burst from impact */
+@keyframes particleBurst {
+  0% {
+    transform: translate(-50%, -50%) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(40px);
+    opacity: 0;
+  }
+}
+
+/* Particle pulse along beam */
+@keyframes particlePulse {
+  0% {
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Muzzle flash */
+@keyframes muzzleFlash {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Screen flash on hit */
+@keyframes screenFlash {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Low health vignette pulse */
+@keyframes lowHealthPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Speed lines for evasive */
+@keyframes speedLine {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+
+/* Afterimage fade */
+@keyframes afterimage {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+/* Shield pulse for energy shunt */
+@keyframes shieldPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Energy particles flowing inward */
+@keyframes energyParticle {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateX(60px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateX(0);
+    opacity: 0;
+  }
+}
+
+/* Ultimate charge aura */
+@keyframes chargeAura {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Ultimate charge ring spin */
+@keyframes chargeRing {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Spiral in for ultimate particles */
+@keyframes spiralIn {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateX(70px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--angle, 0deg) + 180deg)) translateX(0);
+    opacity: 0;
+  }
+}
+
+/* Damage number float */
+@keyframes damageFloat {
+  0% {
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-50%, -50%) translateY(-10px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-60px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Strong screen shake for big hits */
+@keyframes strongShake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-8px, -5px); }
+  20% { transform: translate(8px, 5px); }
+  30% { transform: translate(-6px, 4px); }
+  40% { transform: translate(6px, -4px); }
+  50% { transform: translate(-4px, 3px); }
+  60% { transform: translate(4px, -3px); }
+  70% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(-1px, 1px); }
+}
+
+.strong-shake {
+  animation: strongShake 0.5s ease-out;
+}
+
+/* Ship hit flash */
+@keyframes shipHitFlash {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  25%, 75% {
+    filter: brightness(2) saturate(0) hue-rotate(0deg);
+  }
+  50% {
+    filter: brightness(3) saturate(0);
+  }
+}
+
+.ship-hit {
+  animation: shipHitFlash 0.2s ease-out;
+}
